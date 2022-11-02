@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 from django.urls import path
 
-from farm_base.api.v1.views.farm import FarmListName, FarmListMunicipality, FarmListState, FarmListOwnerName
+from farm_base.api.v1.views.farm import FarmListName, FarmListMunicipality, FarmListState, FarmListOwnerName, FarmListOwnerDocument
 from .views import FarmListCreateView, \
     FarmRetrieveUpdateDestroyView, OwnerListCreateView, \
     OwnerRetrieveUpdateDestroyView
@@ -19,6 +19,8 @@ urlpatterns = [
          name="farm-State"),
     path('farms/Owners/<str:Owner>', FarmListOwnerName.as_view(),
          name="farm-Owner-Name"),
+    path('farms/Owners/<int:Document>', FarmListOwnerDocument.as_view(),
+         name="farm-Owner-Document"),
 
     path('owners', OwnerListCreateView.as_view(),
          name="owners-list-create"),

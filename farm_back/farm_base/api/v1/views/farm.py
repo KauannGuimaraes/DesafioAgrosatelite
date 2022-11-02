@@ -53,3 +53,10 @@ class FarmListOwnerName(generics.ListCreateAPIView):
     def get_queryset(self):
         queryset = Farm.objects.all()
         return queryset
+
+class FarmListOwnerDocument(generics.ListCreateAPIView):
+    serializer_class = FarmListSerializer
+
+    def get_queryset(self):
+        queryset = Farm.objects.all()
+        return queryset
