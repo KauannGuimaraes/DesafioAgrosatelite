@@ -6,15 +6,15 @@ from farm_base.models.owner import Owner
 
 class Farm(models.Model):
     name = models.CharField(verbose_name=_("Name"), max_length=255,
-                            null=False, blank=True)
+                            null=False, blank=False)
     
     municipality = models.CharField(verbose_name=_("Municipality"), max_length=255,
-                            null=False, blank=True)
+                            null=False, blank=False)
 
     state = models.CharField(verbose_name=_("State"), max_length=255,
-                            null=False, blank=True)
+                            null=False, blank=False)
 
-    owner = models.ForeignKey(Owner, verbose_name=_("Owner"), on_delete=models.CASCADE, null=False)
+    owner = models.ForeignKey(Owner, verbose_name=_("Owner"), on_delete=models.CASCADE, null=False, blank=False)
 
     geometry = models.GeometryField(verbose_name=_("Geometry"),
                                     null=True, blank=True)

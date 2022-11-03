@@ -17,10 +17,13 @@ class FarmListCreateView(generics.ListCreateAPIView):
             return FarmCreateSerializer
 
     def perform_create(self, serializer):
-        farm = serializer.save()
-        area = float(farm.geometry.area)
-        centroid = farm.geometry.centroid
-        serializer.save(area=area, centroid=centroid)
+        try:
+            farm = serializer.save()
+            area = float(farm.geometry.area)
+            centroid = farm.geometry.centroid
+            serializer.save(area=area, centroid=centroid)
+        except:
+            return FarmListSerializer
 
 
 class FarmRetrieveUpdateDestroyView(

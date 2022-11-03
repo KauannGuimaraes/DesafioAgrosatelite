@@ -11,7 +11,6 @@ class FarmListSerializer(serializers.ModelSerializer):
         super(FarmListSerializer, self).__init__(*args, **kwargs)
         request = kwargs['context']['request']
         include_geometry = request.GET.get('include_geometry', "false")
-
         if include_geometry.lower() == "true":
             self.fields['geometry'] = GeometryField(read_only=True)
 
