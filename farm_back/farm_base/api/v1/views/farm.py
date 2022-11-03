@@ -30,35 +30,35 @@ class FarmRetrieveUpdateDestroyView(
     serializer_class = FarmDetailSerializer
 
 class FarmListName(generics.ListAPIView):
-    serializer_class = FarmCreateSerializer
+    serializer_class = FarmDetailSerializer
     def get_queryset(self):
         farmname = self.kwargs['name']
         farm = Farm.objects.filter(name = farmname)
         return farm
 
 class FarmListMunicipality(generics.ListAPIView):
-    serializer_class = FarmListSerializer
+    serializer_class = FarmDetailSerializer
     def get_queryset(self):
         farmMunicipality = self.kwargs['municipality']
         farm = Farm.objects.filter(municipality = farmMunicipality)
         return farm
 
 class FarmListState(generics.ListAPIView):
-    serializer_class = FarmListSerializer
+    serializer_class = FarmDetailSerializer
     def get_queryset(self):
         farmState = self.kwargs['state']
         farm = Farm.objects.filter(state = farmState)
         return farm
 
 class FarmListOwnerName(generics.ListAPIView):
-    serializer_class = FarmListSerializer
+    serializer_class = FarmDetailSerializer
     def get_queryset(self):
         farmOwnerName = self.kwargs['name']
         farm = Farm.objects.filter(owner__name__contains=farmOwnerName)
         return farm
 
 class FarmListOwnerDocument(generics.ListAPIView):
-    serializer_class = FarmListSerializer
+    serializer_class = FarmDetailSerializer
     def get_queryset(self):
         farmOwnerDocument = self.kwargs['document']
         farm = Farm.objects.filter(owner__document__contains=farmOwnerDocument)
