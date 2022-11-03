@@ -1,10 +1,8 @@
-import logging
-from requests import Response
-from rest_framework import generics, viewsets
+from rest_framework import generics
 
 from farm_base.api.v1.serializers import FarmListSerializer, \
     FarmCreateSerializer, FarmDetailSerializer
-from farm_base.models import Farm, Owner
+from farm_base.models import Farm
 
 class FarmListCreateView(generics.ListCreateAPIView):
     queryset = Farm.objects.filter(is_active=True)
@@ -32,7 +30,7 @@ class FarmRetrieveUpdateDestroyView(
     serializer_class = FarmDetailSerializer
 
 class FarmListName(generics.ListAPIView):
-    serializer_class = FarmListSerializer
+    serializer_class = FarmCreateSerializer
     def get_queryset(self):
         farmname = self.kwargs['name']
         farm = Farm.objects.filter(name = farmname)

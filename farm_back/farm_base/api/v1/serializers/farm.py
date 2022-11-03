@@ -3,7 +3,7 @@ from osgeo import ogr
 from rest_framework import serializers
 from rest_framework_gis.fields import GeometryField
 
-from farm_base.api.v1.serializers.owner import OwnerDetailSerializer
+
 from farm_base.models import Farm
 
 class FarmListSerializer(serializers.ModelSerializer):
@@ -31,7 +31,7 @@ class FarmCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Farm
         fields = ['id', 'name', 'municipality', 'state', 'centroid', 'area', 'owner']
-        read_only_fields = ['id', 'centroid', 'area']
+        read_only_fields = ['id']
 
 
 class FarmDetailSerializer(serializers.ModelSerializer):
