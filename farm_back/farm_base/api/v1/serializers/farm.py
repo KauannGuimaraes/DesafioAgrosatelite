@@ -6,7 +6,6 @@ from rest_framework_gis.fields import GeometryField
 from farm_base.api.v1.serializers.owner import OwnerDetailSerializer
 from farm_base.models import Farm
 
-
 class FarmListSerializer(serializers.ModelSerializer):
     def __init__(self, *args, **kwargs):
         super(FarmListSerializer, self).__init__(*args, **kwargs)
@@ -32,14 +31,13 @@ class FarmCreateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Farm
-        fields = ['id', 'name', 'geometry', 'centroid', 'area']
+        fields = ['id', 'name', 'municipality', 'state', 'centroid', 'area', 'owner']
         read_only_fields = ['id', 'centroid', 'area']
 
 
 class FarmDetailSerializer(serializers.ModelSerializer):
-    owner = OwnerDetailSerializer(read_only=True)
 
     class Meta:
         model = Farm
-        fields = '__all__'
+        fields = ['id', 'name', 'municipality', 'state', 'centroid', 'area', 'owner']
         read_only_fields = ['id', 'centroid', 'area']

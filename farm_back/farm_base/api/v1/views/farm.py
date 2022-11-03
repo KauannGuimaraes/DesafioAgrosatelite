@@ -1,9 +1,10 @@
-from rest_framework import generics
+import logging
+from requests import Response
+from rest_framework import generics, viewsets
 
 from farm_base.api.v1.serializers import FarmListSerializer, \
     FarmCreateSerializer, FarmDetailSerializer
-from farm_base.models import Farm
-
+from farm_base.models import Farm, Owner
 
 class FarmListCreateView(generics.ListCreateAPIView):
     queryset = Farm.objects.filter(is_active=True)
@@ -27,36 +28,37 @@ class FarmRetrieveUpdateDestroyView(
     queryset = Farm.objects.filter(is_active=True)
     serializer_class = FarmDetailSerializer
 
-class FarmListName(generics.ListCreateAPIView):
+class FarmListName(generics.ListAPIView):
     serializer_class = FarmListSerializer
-
     def get_queryset(self):
-        queryset = Farm.objects.all()
-        return queryset
+        farmname = self.kwargs['name']
+        farm = Farm.objects.filter(name = farmname)
+        return farm
 
-class FarmListMunicipality(generics.ListCreateAPIView):
+class FarmListMunicipality(generics.ListAPIView):
     serializer_class = FarmListSerializer
-
     def get_queryset(self):
-        queryset = Farm.objects.all()
-        return queryset
-class FarmListState(generics.ListCreateAPIView):
+        farmMunicipality = self.kwargs['municipality']
+        farm = Farm.objects.filter(municipality = farmMunicipality)
+        return farm
+
+class FarmListState(generics.ListAPIView):
     serializer_class = FarmListSerializer
-
     def get_queryset(self):
-        queryset = Farm.objects.all()
-        return queryset
+        farmState = self.kwargs['state']
+        farm = Farm.objects.filter(state = farmState)
+        return farm
 
-class FarmListOwnerName(generics.ListCreateAPIView):
+class FarmListOwnerName(generics.ListAPIView):
     serializer_class = FarmListSerializer
-
     def get_queryset(self):
-        queryset = Farm.objects.all()
-        return queryset
+        farmOwnerName = self.kwargs['name']
+        farm = Farm.objects.filter(owner__name__contains=farmOwnerName)
+        return farm
 
-class FarmListOwnerDocument(generics.ListCreateAPIView):
+class FarmListOwnerDocument(generics.ListAPIView):
     serializer_class = FarmListSerializer
-
     def get_queryset(self):
-        queryset = Farm.objects.all()
-        return queryset
+        farmOwnerDocument = self.kwargs['document']
+        farm = Farm.objects.filter(owner__document__contains=farmOwnerDocument)
+        return farm

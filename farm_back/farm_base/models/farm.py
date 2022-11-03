@@ -14,7 +14,7 @@ class Farm(models.Model):
     state = models.CharField(verbose_name=_("State"), max_length=255,
                             null=False, blank=True)
 
-    owner = models.OneToOneField(Owner, verbose_name=_("Owner"), on_delete=models.CASCADE, null=False)
+    owner = models.ForeignKey(Owner, verbose_name=_("Owner"), on_delete=models.CASCADE, null=False)
 
     geometry = models.GeometryField(verbose_name=_("Geometry"),
                                     null=True, blank=True)
